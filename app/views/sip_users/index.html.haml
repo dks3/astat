@@ -1,0 +1,27 @@
+%h1 Listing sip_users
+
+%table
+  %tr
+    %th Name
+    %th Callerid
+    %th Username
+    %th Telephon type
+    %th Podrazdelenie
+    %th
+    %th
+    %th
+
+  - @sip_users.each do |sip_user|
+    %tr
+      %td= sip_user.name
+      %td= sip_user.callerid
+      %td= sip_user.username
+      %td= sip_user.telephon_type
+      %td= sip_user.podrazdelenie
+      %td= link_to 'Show', sip_user
+      %td= link_to 'Edit', edit_sip_user_path(sip_user)
+      %td= link_to 'Destroy', sip_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sip user', new_sip_user_path

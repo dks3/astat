@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @sip_user.name
+%p
+  %b Callerid:
+  = @sip_user.callerid
+%p
+  %b Username:
+  = @sip_user.username
+%p
+  %b Telephon type:
+  = @sip_user.telephon_type
+%p
+  %b Podrazdelenie:
+  = @sip_user.podrazdelenie
+
+= link_to 'Edit', edit_sip_user_path(@sip_user)
+\|
+= link_to 'Back', sip_users_path

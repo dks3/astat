@@ -8,6 +8,10 @@
     = csrf_meta_tags
 
   %body
+    .navbar.navbar-inverse
+      .navbar-inner
+        .container
+          =link_to "Список клиентов",root_path , class: 'navbar-brand'
     .container
       =notice_messages
       =yield

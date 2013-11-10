@@ -10,6 +10,7 @@ class SipUsersController < ApplicationController
   # GET /sip_users/1
   # GET /sip_users/1.json
   def show
+    unless subdivisions
   end
 
   # GET /sip_users/new

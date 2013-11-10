@@ -1,0 +1,25 @@
+ru:
+  activerecord:
+    model:
+      subdivision: Отдел
+    attributes:
+      subdivision:
+        title: Название
+  messages:
+    subdivision:
+      created: Отдел успешно добавлен.
+      updated: Отдел успешно обновлен.
+      deleted: Отдел успешно  удален.
+    are_you_sure: Вы уверены?
+  titles:
+   new_subdivision: Новая отдел
+   index_subdivision: Список отделов
+   editing_subdivision: Редактирование отдела
+  links:
+    new_subdivision: Новый отдел
+    back: Назад
+    edit: Редактировать
+    show: Просмотр
+    destroy: Удалить
+  buttons:
+    save: Сохранить

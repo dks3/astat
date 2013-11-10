@@ -34,6 +34,9 @@ end
 gem 'haml-rails'
 gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 gem 'paperclip'
+
+#Локализация
+gem 'rails-i18n'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

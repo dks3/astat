@@ -5,8 +5,6 @@ class CreatePeople < ActiveRecord::Migration
       t.string  :firstname
       t.string  :patronymic
       t.integer :sip_user_id
-      t.integer :subdivision_id
-      t.integer :function_id
       t.integer :city_id
       t.boolean :status
 

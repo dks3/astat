@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110192951) do
+ActiveRecord::Schema.define(version: 0) do
 
   create_table "ast_config", force: true do |t|
     t.integer "cat_metric",             default: 0,         null: false
@@ -85,24 +85,11 @@ ActiveRecord::Schema.define(version: 20131110192951) do
 
   add_index "functions", ["title"], name: "uniq_func", unique: true, using: :btree
 
-  create_table "people", force: true do |t|
-    t.string   "surname"
-    t.string   "firstname"
-    t.string   "patronymic"
-    t.integer  "sip_user_id"
-    t.integer  "subdivision_id"
-    t.integer  "function_id"
-    t.integer  "city_id"
-    t.boolean  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sip_users", force: true do |t|
     t.string  "name",           limit: 80,                          null: false
     t.string  "host",           limit: 31,  default: "dynamic",     null: false
     t.string  "nat",            limit: 5,   default: "yes",         null: false
-    t.text    "type",                       default: "friend",      null: false
+    t.text    "ntype",                      default: "friend",      null: false
     t.string  "accountcode",    limit: 20
     t.string  "amaflags",       limit: 13
     t.string  "callgroup",      limit: 10,  default: "1",           null: false
@@ -153,14 +140,6 @@ ActiveRecord::Schema.define(version: 20131110192951) do
 
   add_index "sip_users", ["name", "host"], name: "sip_users_idx", using: :btree
   add_index "sip_users", ["name"], name: "uniq_name", unique: true, using: :btree
-
-  create_table "subdivisions", force: true do |t|
-    t.text     "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "subdivisions", ["title"], name: "index_subdivisions_on_title", using: :btree
 
   create_table "units", force: true do |t|
     t.text "surname",    null: false

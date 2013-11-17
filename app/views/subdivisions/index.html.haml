@@ -5,28 +5,26 @@
 %table.table
   %thead
     %tr
+
       %th Фамилия
       %th Имя
       %th Отчество
       %th Номер ip-тел.
-    %tr
+    %tbody
       - @subdivisions.each do |subdivision|
-        %th.active
-          = subdivision.title
-        %th.active
-        %th.active
-        %th.active
-        %tbody
+        %tr
+          %td{rowspan: subdivision.people.size}= subdivision.title
           - subdivision.people.each do |person|
-            %tr
-              %td= person.surname
-              %td= person.firstname
-              %td= person.patronymic
-              %td= person.sip_user.name
 
-        -#%td= link_to 'Show', subdivision, class: 'btn btn-primary'
-        -# %td= link_to 'Edit', edit_sip_user_path(sip_user)
-        -# %td= link_to 'Destroy', sip_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= person.surname
+            %td= person.firstname
+            %td= person.patronymic
+            %tr
+            -#%td= person.sip_user.name
+
+                -#%td= link_to 'Show', subdivision, class: 'btn btn-primary'
+                -# %td= link_to 'Edit', edit_sip_user_path(sip_user)
+                -# %td= link_to 'Destroy', sip_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 -#%th= Subdivision.human_attribute_name("title")
 -# @subdivisions.each do |subdivision|

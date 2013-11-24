@@ -1,0 +1,6 @@
+@import "twitter/bootstrap";
+.table-default{
+  @extend .table;
+  @extend .table-bordered;
+  @extend .table-striped;
+}

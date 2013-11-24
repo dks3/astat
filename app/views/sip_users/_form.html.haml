@@ -1,0 +1,25 @@
+= form_for @sip_user do |f|
+  - if @sip_user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sip_user.errors.count, "error")} prohibited this sip_user from being saved:"
+      %ul
+        - @sip_user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :callerid
+    = f.text_field :callerid
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :telephon_type
+    = f.text_area :telephon_type
+  .field
+    = f.label :podrazdelenie
+    = f.text_area :podrazdelenie
+  .actions
+    = f.submit 'Save'

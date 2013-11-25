@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20131118115412) do
+=======
+ActiveRecord::Schema.define(version: 0) do
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
 
   create_table "ast_config", force: true do |t|
     t.integer "cat_metric",             default: 0,         null: false
@@ -53,6 +57,7 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.text     "userfield",             default: "", null: false
   end
 
+<<<<<<< HEAD
   create_table "cities", force: true do |t|
     t.integer  "number"
     t.integer  "channels"
@@ -62,6 +67,8 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.datetime "updated_at"
   end
 
+=======
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
   create_table "city", force: true do |t|
     t.integer "city_number",                            null: false
     t.integer "channels",    limit: 2, default: 1,      null: false
@@ -89,6 +96,7 @@ ActiveRecord::Schema.define(version: 20131118115412) do
   add_index "extensions", ["id"], name: "extensions_id_key", unique: true, using: :btree
 
   create_table "functions", force: true do |t|
+<<<<<<< HEAD
     t.text     "title"
     t.integer  "rank"
     t.datetime "created_at"
@@ -113,6 +121,12 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+=======
+    t.text "title", null: false
+  end
+
+  add_index "functions", ["title"], name: "uniq_func", unique: true, using: :btree
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
 
   create_table "sip_users", force: true do |t|
     t.string  "name",           limit: 80,                          null: false
@@ -170,6 +184,7 @@ ActiveRecord::Schema.define(version: 20131118115412) do
   add_index "sip_users", ["name", "host"], name: "sip_users_idx", using: :btree
   add_index "sip_users", ["name"], name: "uniq_name", unique: true, using: :btree
 
+<<<<<<< HEAD
   create_table "subdivisions", force: true do |t|
     t.text     "title"
     t.datetime "created_at"
@@ -178,6 +193,8 @@ ActiveRecord::Schema.define(version: 20131118115412) do
 
   add_index "subdivisions", ["title"], name: "index_subdivisions_on_title", using: :btree
 
+=======
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
   create_table "units", force: true do |t|
     t.text "surname",    null: false
     t.text "firstname",  null: false

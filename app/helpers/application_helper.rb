@@ -6,6 +6,7 @@ module ApplicationHelper
   def notice_messages
     render 'layouts/notice_messages'
   end
+<<<<<<< HEAD
 
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
@@ -21,4 +22,6 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
+=======
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
 end

@@ -19,7 +19,11 @@ development:
   encoding: unicode
   database: postgres
   pool: 5
+<<<<<<< HEAD
   username: dks3
+=======
+  username: postgres
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33
   password: postgres
 
   # Connect on a TCP socket. Omitted by default since the client uses a

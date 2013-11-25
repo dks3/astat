@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require twitter/bootstrap
 //= require_tree .
+<<<<<<< HEAD
 
 
 function remove_fields(link) {
@@ -27,3 +28,5 @@ function add_fields(link, association, content) {
     var regexp = new RegExp("new_" + association, 'g')
     $(link).parent().before(content.replace(regexp, new_id));
 }
+=======
+>>>>>>> cbfd00219ef1cb36cedf1218f6d4c45963597e33

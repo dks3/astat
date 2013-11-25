@@ -1,0 +1,6 @@
+.fields
+  = f.label 'Отдел'
+  = f.select :subdivision_id, Subdivision.all.map{|sub| [sub.title, sub.id]}, {:include_blank => true, :default => nil}
+  = f.label 'Должность'
+  = f.select :function_id, Function.all.map{|fun| [fun.title, fun.id]}, {:include_blank => true, :default => nil}
+  .btn=link_to_remove_fields "Удалить", f

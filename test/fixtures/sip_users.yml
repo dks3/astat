@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  callerid: MyString
+  username: MyString
+  telephon_type: MyText
+  podrazdelenie: MyText
+
+two:
+  name: MyString
+  callerid: MyString
+  username: MyString
+  telephon_type: MyText
+  podrazdelenie: MyText

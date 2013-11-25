@@ -1,0 +1,40 @@
+%h1= t('titles.index_subdivision')
+
+
+=link_to "Добавить Sip пользователя", new_person_path , class: 'btn btn-primary btn-sm'
+%table.table
+  %thead
+    %tr
+      %th Отдел
+      %th Должность
+      %th Фамилия
+      %th Имя
+      %th Отчество
+      %th Гор. тел.
+      %th Номер ip-тел.
+  %tbody
+    - @subdivisions.each do |subdivision|
+      %tr
+        %td{rowspan: subdivision.positions.size}
+          = subdivision.title
+        %td= subdivision.positions[0].function.title
+        %td= subdivision.positions[0].person.surname
+        %td= subdivision.positions[0].person.firstname
+        %td= subdivision.positions[0].person.patronymic
+        %td= subdivision.positions[0].person.city.number
+        %td= subdivision.positions[0].person.sip_user.name
+        - subdivision.positions[1..-1].each do |position|
+          %tr
+            %td= position.function.title
+            %td= position.person.surname
+            %td= position.person.firstname
+            %td= position.person.patronymic
+            %td= position.person.city.number
+            %td= position.person.sip_user.name
+            -#%td= link_to 'Show', subdivision, class: 'btn btn-primary'
+              -# %td= link_to 'Edit', edit_sip_user_path(sip_user)
+                -# %td= link_to 'Destroy', sip_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+-#%th= Subdivision.human_attribute_name("title")
+-# @subdivisions.each do |subdivision|
+-#= link_to 'New Sip user', new_sip_user_path

@@ -8,6 +8,9 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @person.build_city
+    @person.build_sip_user
+
   end
 
   def create
@@ -20,6 +23,7 @@ class PeopleController < ApplicationController
         format.html { render action: 'new' }
       end
     end
+
   end
 
   def update
@@ -36,6 +40,6 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:surname, :firstname, :patronymic, positions_attributes: [:id, :person_id, :function_id, :subdivision_id, :_destroy])
+    params.require(:person).permit(:surname, :firstname, :patronymic, positions_attributes: [:id, :person_id, :function_id, :subdivision_id, :_destroy], city_attributes: [:id, :number, :_destroy],  sip_user_attributes: [:id, :name, :callerid, :username, :mailbox, :_destroy])
   end
 end

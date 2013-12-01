@@ -9,6 +9,15 @@ class PositionsController < ApplicationController
     @position = Position.find(params[:id])
     person = @position.person
     @position.destroy
-    redirect_to person_path(person), notice: "Позиция удалена"
+    person.destroy if person.positions.empty?
+    redirect_to subdivisions_path, notice: "Позиция удалена"
+
   end
+
+ # def destroy
+ #   @position = Position.find(params[:id])
+ #   person = @position.person
+  #  @position.destroy
+  #  redirect_to person_path(person), notice: "Позиция удалена"
+  #end
 end

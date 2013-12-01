@@ -12,6 +12,7 @@
       %th Отчество
       %th Гор. тел.
       %th Номер ip-тел.
+      %th
   %tbody
     - @subdivisions.each do |subdivision|
       %tr
@@ -21,19 +22,25 @@
         %td= subdivision.positions[0].person.surname
         %td= subdivision.positions[0].person.firstname
         %td= subdivision.positions[0].person.patronymic
-        %td= subdivision.positions[0].person.city.number
-        %td= subdivision.positions[0].person.sip_user.name
+        -unless subdivision.positions[0].person.city.blank?
+          %td= subdivision.positions[0].person.city.number
+        -unless subdivision.positions[0].person.sip_user.blank?
+          %td= subdivision.positions[0].person.sip_user.name
+        %td= link_to 'Destroy', subdivision.positions[0], :method => :delete, :data => { :confirm => 'Вы уверены?' }
         - subdivision.positions[1..-1].each do |position|
           %tr
             %td= position.function.title
             %td= position.person.surname
             %td= position.person.firstname
-            %td= position.person.patronymic
-            %td= position.person.city.number
-            %td= position.person.sip_user.name
+            -unless position.person.blank?
+              %td= position.person.patronymic
+            -unless position.person.city.blank?
+              %td= position.person.city.number
+            -unless position.person.sip_user.blank?
+              %td= position.person.sip_user.name
             -#%td= link_to 'Show', subdivision, class: 'btn btn-primary'
               -# %td= link_to 'Edit', edit_sip_user_path(sip_user)
-                -# %td= link_to 'Destroy', sip_user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= link_to 'Destroy', position, :method => :delete, :data => { :confirm => 'Вы уверены?' }
 
 -#%th= Subdivision.human_attribute_name("title")
 -# @subdivisions.each do |subdivision|

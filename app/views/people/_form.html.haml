@@ -16,11 +16,22 @@
     = f.label :patronymic
     = f.text_field :patronymic
   .field
-    = f.label :city
-    = f.text_field :city
+    = f.fields_for :city do |city_form|
+      = city_form.label :number
+      = city_form.text_field :number
   .field
-    = f.label :ip_номер
-    = f.text_field :sip_user
+    = f.fields_for :sip_user do |sip_user_form|
+      = sip_user_form.label :name
+      = sip_user_form.text_field :name
+      .field
+        = sip_user_form.label :callerid
+        = sip_user_form.text_field :callerid
+      .field
+        = sip_user_form.label :username
+        = sip_user_form.text_field :username
+      .field
+        = sip_user_form.label :mailbox
+        = sip_user_form.text_field :mailbox
   .field
     = f.fields_for :positions do |position|
       =render "position_fields", :f => position

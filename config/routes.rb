@@ -1,6 +1,10 @@
 Astat::Application.routes.draw do
   resources :people
-  resources :positions
+  resources :positions do
+    collection do
+      post :sort
+    end
+  end
   resources :subdivisions
   resources :sip_users
   resources :cities

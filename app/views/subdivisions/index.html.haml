@@ -1,8 +1,9 @@
-%h1= t('titles.index_subdivision')
+.page-header
+  %h1= t('titles.index_subdivision')
 
 
 =link_to "Добавить Sip пользователя", new_person_path , class: 'btn btn-primary btn-sm'
-%table.table
+%table.table.table-default.table-sortable{data:{url: sort_positions_path}}
   %thead
     %tr
       %th Отдел
@@ -13,35 +14,21 @@
       %th Гор. тел.
       %th Номер ip-тел.
       %th
+      %th
   %tbody
     - @subdivisions.each do |subdivision|
-      %tr
-        %td{rowspan: subdivision.positions.size}
-          = subdivision.title
-        %td= subdivision.positions[0].function.title
-        %td= subdivision.positions[0].person.surname
-        %td= subdivision.positions[0].person.firstname
-        %td= subdivision.positions[0].person.patronymic
-        -unless subdivision.positions[0].person.city.blank?
-          %td= subdivision.positions[0].person.city.number
-        -unless subdivision.positions[0].person.sip_user.blank?
-          %td= subdivision.positions[0].person.sip_user.name
-        %td= link_to 'Destroy', subdivision.positions[0], :method => :delete, :data => { :confirm => 'Вы уверены?' }
-        - subdivision.positions[1..-1].each do |position|
-          %tr
-            %td= position.function.title
-            %td= position.person.surname
-            %td= position.person.firstname
-            -unless position.person.blank?
-              %td= position.person.patronymic
-            -unless position.person.city.blank?
-              %td= position.person.city.number
-            -unless position.person.sip_user.blank?
-              %td= position.person.sip_user.name
-            -#%td= link_to 'Show', subdivision, class: 'btn btn-primary'
-              -# %td= link_to 'Edit', edit_sip_user_path(sip_user)
-            %td= link_to 'Destroy', position, :method => :delete, :data => { :confirm => 'Вы уверены?' }
-
--#%th= Subdivision.human_attribute_name("title")
--# @subdivisions.each do |subdivision|
--#= link_to 'New Sip user', new_sip_user_path
+      - subdivision.positions.each do |position|
+        %tr[position]
+          %td= subdivision.title
+          %td= position.function.title
+          %td= position.person.surname
+          %td= position.person.firstname
+          %td= position.person.patronymic unless position.person.patronymic.blank?
+          %td= position.person.city.number unless position.person.city.blank?
+          %td= position.person.sip_user.name unless position.person.sip_user.blank?
+          %td
+            = link_to edit_person_path(position.person), class: 'btn btn-primary' do
+              %span.glyphicon.glyphicon-edit
+          %td
+            = link_to position, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger' do
+              %span.glyphicon.glyphicon-trash

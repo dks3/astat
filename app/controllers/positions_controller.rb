@@ -14,6 +14,13 @@ class PositionsController < ApplicationController
 
   end
 
+  def sort
+    params[:position].each_with_index do |id, i|
+      Position.update_all({subdivision_id: i}, {id: id})
+    end
+    render nothing: true
+  end
+
  # def destroy
  #   @position = Position.find(params[:id])
  #   person = @position.person

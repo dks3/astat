@@ -3,4 +3,5 @@ class SubdivisionsController < ApplicationController
     @subdivisions = Subdivision.includes(:functions, people: [:sip_user, :city]).all
 
   end
+
 end

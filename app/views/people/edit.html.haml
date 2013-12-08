@@ -1,4 +1,4 @@
 .page-header
   %h1 Редактировать SIP пользователя
-
+  = link_to 'Удалить пользователя', @person, :method => :delete, :data => { :confirm => 'Удалить пользователя и все его записи?' }, class: 'btn btn-danger'
 = render 'form'

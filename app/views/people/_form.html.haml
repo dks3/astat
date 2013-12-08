@@ -1,40 +1,184 @@
 = form_for @person do |f|
-  - if @person.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@person.errors.count, "error")} prohibited this sip_user from being saved:"
-      %ul
-        - @person.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :surname
-    = f.text_field :surname
-  .field
-    = f.label :firstname
-    = f.text_field :firstname
-  .field
-    = f.label :patronymic
-    = f.text_field :patronymic
-  .field
-    = f.fields_for :city do |city_form|
-      = city_form.label :number
-      = city_form.text_field :number
-  .field
-    = f.fields_for :sip_user do |sip_user_form|
-      = sip_user_form.label :name
-      = sip_user_form.text_field :name
-      .field
-        = sip_user_form.label :callerid
-        = sip_user_form.text_field :callerid
-      .field
-        = sip_user_form.label :username
-        = sip_user_form.text_field :username
-      .field
-        = sip_user_form.label :mailbox
-        = sip_user_form.text_field :mailbox
+  =error_messages_for(@person)
+  /- if @person.errors.any?
+  /  #error_explanation
+  /    %h2= "#{pluralize(@person.errors.count, "error")} prohibited this sip_user from being saved:"
+  /    %ul
+  /      - @person.errors.full_messages.each do |msg|
+  /        %li= msg
+  .actions
+    = f.submit 'Сохранить пользователя', class: 'btn btn-primary'
   .field
     = f.fields_for :positions do |position|
       =render "position_fields", :f => position
     .btn=link_to_add_fields "Добавить должность", f, :positions
-  .actions
-    = f.submit nil, class: 'btn btn-primary'
+  .col-xs-4
+    .field
+      %h4= f.label "Пользователь"
+      = f.text_field :surname, placeholder: "Фамилия", class: 'form-control'
+    .field
+      = f.text_field :firstname, placeholder: "Имя", class: 'form-control'
+    .field
+      = f.text_field :patronymic, placeholder: "Отчество", class: 'form-control'
+  .col-xs-4
+    .field
+      = f.fields_for :sip_user do |sip_user_form|
+        %h4= sip_user_form.label "Sip настройки"
+        = sip_user_form.label :name
+        = sip_user_form.text_field :name, class: 'form-control'
+        .field
+          = sip_user_form.label :callerid
+          = sip_user_form.text_field :callerid, class: 'form-control'
+        .field
+          = sip_user_form.label :username
+          = sip_user_form.text_field :username, class: 'form-control'
+        .field
+          = sip_user_form.label :mailbox
+          = sip_user_form.text_field :mailbox, class: 'form-control'
+        .field
+          = sip_user_form.label :host
+          = sip_user_form.text_field :host, class: 'form-control'
+        .field
+          = sip_user_form.label :nat
+          = sip_user_form.text_field :nat, class: 'form-control'
+        .field
+          = sip_user_form.label :ntype
+          = sip_user_form.select :ntype,  [['friend', 'friend'], ['peer', 'peer'], ['user', 'user']]
+        .field
+          = sip_user_form.label :accountcode
+          = sip_user_form.text_field :accountcode, class: 'form-control'
+        .field
+          = sip_user_form.label :amaflags
+          = sip_user_form.text_field :amaflags, class: 'form-control'
+        .field
+          = sip_user_form.label :callgroup
+          = sip_user_form.text_field :callgroup, class: 'form-control'
+        .field
+          = sip_user_form.label :cancallforward
+          = sip_user_form.text_field :cancallforward, class: 'form-control'
+        .field
+          = sip_user_form.label :canreinvite
+          = sip_user_form.text_field :canreinvite, class: 'form-control'
+        .field
+          = sip_user_form.label :context
+          = sip_user_form.text_field :context, class: 'form-control'
+        .field
+          = sip_user_form.label :defaultip
+          = sip_user_form.text_field :defaultip, class: 'form-control'
+        .field
+          = sip_user_form.label :dtmfmode
+          = sip_user_form.text_field :dtmfmode, class: 'form-control'
+        .field
+          = sip_user_form.label :fromuser
+          = sip_user_form.text_field :fromuser, class: 'form-control'
+        .field
+          = sip_user_form.label :fromdomain
+          = sip_user_form.text_field :fromdomain, class: 'form-control'
+        .field
+          = sip_user_form.label :insecure
+          = sip_user_form.text_field :insecure, class: 'form-control'
+        .field
+          = sip_user_form.label :language
+          = sip_user_form.text_field :language, class: 'form-control'
+        .field
+          = sip_user_form.label :md5secret
+          = sip_user_form.text_field :md5secret, class: 'form-control'
+        .field
+          = sip_user_form.label :deny
+          = sip_user_form.text_field :deny, class: 'form-control'
+        .field
+          = sip_user_form.label :permit
+          = sip_user_form.text_field :permit, class: 'form-control'
+        .field
+          = sip_user_form.label :mask
+          = sip_user_form.text_field :mask, class: 'form-control'
+        .field
+          = sip_user_form.label :musiconhold
+          = sip_user_form.text_field :musiconhold, class: 'form-control'
+        .field
+          = sip_user_form.label :pickupgroup
+          = sip_user_form.text_field :pickupgroup, class: 'form-control'
+        .field
+          = sip_user_form.label :qualify
+          = sip_user_form.text_field :qualify, class: 'form-control'
+        .field
+          = sip_user_form.label :regexten
+          = sip_user_form.text_field :regexten, class: 'form-control'
+        .field
+          = sip_user_form.label :restrictcid
+          = sip_user_form.text_field :restrictcid, class: 'form-control'
+        .field
+          = sip_user_form.label :rtptimeout
+          = sip_user_form.text_field :rtptimeout, class: 'form-control'
+        .field
+          = sip_user_form.label :rtpholdtimeout
+          = sip_user_form.text_field :rtpholdtimeout, class: 'form-control'
+        .field
+          = sip_user_form.label :secret
+          = sip_user_form.text_field :secret, class: 'form-control'
+        .field
+          = sip_user_form.label :setvar
+          = sip_user_form.text_field :setvar, class: 'form-control'
+        .field
+          = sip_user_form.label :disallow
+          = sip_user_form.text_field :disallow, class: 'form-control'
+        .field
+          = sip_user_form.label :allow
+          = sip_user_form.text_field :allow, class: 'form-control'
+        .field
+          = sip_user_form.label :fullcontact
+          = sip_user_form.text_field :fullcontact, class: 'form-control'
+        .field
+          = sip_user_form.label :port
+          = sip_user_form.text_field :port, class: 'form-control'
+        .field
+          = sip_user_form.label :regserver
+          = sip_user_form.text_field :regserver, class: 'form-control'
+        .field
+          = sip_user_form.label :regseconds
+          = sip_user_form.text_field :regseconds, class: 'form-control'
+        .field
+          = sip_user_form.label :lasms
+          = sip_user_form.text_field :lasms, class: 'form-control'
+        .field
+          = sip_user_form.label :podrazdelenie
+          = sip_user_form.text_field :podrazdelenie, class: 'form-control'
+        .field
+          = sip_user_form.label :rus_name
+          = sip_user_form.text_field :rus_name, class: 'form-control'
+        .field
+          = sip_user_form.label :zvanie
+          = sip_user_form.text_field :zvanie, class: 'form-control'
+        .field
+          = sip_user_form.label :allow_city_in
+          = sip_user_form.check_box :allow_city_in
+        .field
+          = sip_user_form.label :allow_city_out
+          = sip_user_form.check_box :allow_city_out
+        .field
+          = sip_user_form.label :telephon_type
+          = sip_user_form.text_field :telephon_type, class: 'form-control'
+        .field
+          = sip_user_form.label :full_name
+          = sip_user_form.text_field :full_name, class: 'form-control'
+        .field
+          = sip_user_form.label :prio_zv
+          = sip_user_form.text_field :prio_zv, class: 'form-control'
+        .field
+          = sip_user_form.label :prio_podr
+          = sip_user_form.text_field :prio_podr, class: 'form-control'
+        .field
+          = sip_user_form.label :vip
+          = sip_user_form.check_box :vip
+  .col-xs-4
+    .field
+      = f.fields_for :city do |city_form|
+        %h4= city_form.label 'Городская линия'
+        = city_form.label :number
+        = city_form.text_field :number, placeholder: "1234567", class: 'form-control'
+        = city_form.label :file
+        = city_form.text_field :file, class: 'form-control'
+        = city_form.label :channels
+        = city_form.text_field :channels, class: 'form-control'
+        = city_form.label :autoanswer
+        = city_form.check_box :autoanswer

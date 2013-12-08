@@ -7,4 +7,6 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :positions, reject_if: :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :city, :allow_destroy => true
   accepts_nested_attributes_for :sip_user, :allow_destroy => true
+  validates :surname, :firstname, presence: true
+  validates_associated :positions
 end

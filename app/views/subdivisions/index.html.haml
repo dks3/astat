@@ -6,7 +6,7 @@
 %table.table.table-default.table-sortable{data:{url: sort_positions_path}}
   %thead
     %tr
-      %th Отдел
+      %th
       %th Должность
       %th Фамилия
       %th Имя
@@ -17,10 +17,14 @@
       %th
   %tbody
     - @subdivisions.each do |subdivision|
+      %tr.handle.subdivision{data: {id: subdivision.id}}
+        %td{colspan: 9}=subdivision.title
       - subdivision.positions.each do |position|
-        %tr[position]
-          %td= subdivision.title
-          %td= position.function.title
+        %tr.handle{data: {id: position.id}}
+          %td
+            %span.glyphicon.glyphicon-resize-vertical
+          %td
+            = position.function.title
           %td= position.person.surname
           %td= position.person.firstname
           %td= position.person.patronymic unless position.person.patronymic.blank?

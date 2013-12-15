@@ -15,9 +15,9 @@ class PositionsController < ApplicationController
   end
 
   def sort
-    params[:position].each_with_index do |id, i|
-      Position.update_all({subdivision_id: i}, {id: id})
-    end
+    @position=Position.find(params[:position])
+    @position.update(subdivision_id: params[:subdivision_id])
+
     render nothing: true
   end
 
@@ -26,5 +26,9 @@ class PositionsController < ApplicationController
  #   person = @position.person
   #  @position.destroy
   #  redirect_to person_path(person), notice: "Позиция удалена"
+  #end
+private
+  #def position_params
+  #  params.require(:position).permit(:id, :subdivision_id)
   #end
 end

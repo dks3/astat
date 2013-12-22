@@ -19,7 +19,7 @@
     - @subdivisions.each do |subdivision|
       %tr.handle.subdivision{data: {id: subdivision.id}}
         %td{colspan: 9}=subdivision.title
-      - subdivision.positions.each do |position|
+      - subdivision.ordered_positions.each do |position|
         %tr.handle{data: {id: position.id}}
           %td
             %span.glyphicon.glyphicon-resize-vertical

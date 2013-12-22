@@ -1,0 +1,32 @@
+.page-header
+  %h1= "Статистика отделов"
+
+
+
+%table.table
+  %thead
+    %tr
+      %th Дата начала
+      %th Длитиельность
+      %th От кого
+      %th Кому
+
+  %tbody
+    - @subdivisions.each do |subdivision|
+      %tr
+        %td{colspan: 4}=subdivision.title
+      -subdivision.calls.all.each do |c|
+
+        %tr
+          %td= l c.calldate, format: :long
+          %td= c.billsec
+          %td= c.src
+          %td= c.dst
+
+
+
+    /
+    /  %tr
+    /    %td{colspan: 4}=subdivision.title
+    /  %tr
+    /    %td= statistics_select(subdivision)

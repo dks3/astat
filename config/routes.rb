@@ -8,7 +8,8 @@ Astat::Application.routes.draw do
   resources :subdivisions
   resources :sip_users
   resources :cities
-  root 'subdivisions#index'
+  resources :statistics_departments
+  root 'statistics_departments#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

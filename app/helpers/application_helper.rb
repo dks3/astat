@@ -21,4 +21,13 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
+
+
+  def sortable(column, title = nil)
+    title = title
+    direction = column == @sort_p && @direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction, :time1 => @time1, :time2 => @time2}
+  end
+
+
 end

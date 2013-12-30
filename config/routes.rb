@@ -1,4 +1,5 @@
 Astat::Application.routes.draw do
+  get "statistics_people/index"
   resources :people
   resources :positions do
     collection do
@@ -9,6 +10,7 @@ Astat::Application.routes.draw do
   resources :sip_users
   resources :cities
   resources :statistics_departments
+  resources :statistics_people
   root 'statistics_departments#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -13,27 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131118115412) do
 
-  create_table "ast_config", force: true do |t|
-    t.integer "cat_metric",             default: 0,         null: false
-    t.integer "var_metric",             default: 0,         null: false
-    t.string  "filename",   limit: 128, default: "",        null: false
-    t.string  "category",   limit: 128, default: "default", null: false
-    t.string  "var_name",   limit: 128, default: "",        null: false
-    t.string  "var_val",    limit: 128, default: "",        null: false
-    t.integer "commented",  limit: 2,   default: 0,         null: false
-  end
-
-  create_table "base", force: true do |t|
-    t.integer "id_dep",                    null: false
-    t.integer "id_unit"
-    t.integer "id_func",                   null: false
-    t.integer "id_number",                 null: false
-    t.integer "id_city"
-    t.boolean "status",    default: false, null: false
-    t.integer "next_id"
-    t.boolean "start",     default: false, null: false
-  end
-
   create_table "cdr", primary_key: "cdr_pkey", force: true do |t|
     t.datetime "calldate",                           null: false
     t.text     "clid",                  default: "", null: false
@@ -54,39 +33,13 @@ ActiveRecord::Schema.define(version: 20131118115412) do
   end
 
   create_table "cities", force: true do |t|
-    t.integer  "number"
+    t.string   "number"
     t.integer  "channels"
     t.text     "file"
     t.boolean  "autoanswer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "city", force: true do |t|
-    t.integer "city_number",                            null: false
-    t.integer "channels",    limit: 2, default: 1,      null: false
-    t.text    "file",                  default: "msiu", null: false
-    t.boolean "autoanswer",            default: false,  null: false
-  end
-
-  create_table "departments", force: true do |t|
-    t.text    "title",       null: false
-    t.integer "parent_id"
-    t.integer "previous_id"
-  end
-
-  add_index "departments", ["title"], name: "uniq_dep", unique: true, using: :btree
-
-  create_table "extensions", id: false, force: true do |t|
-    t.integer "id",                                     null: false
-    t.string  "context",  limit: 40,  default: "msiu",  null: false
-    t.string  "exten",    limit: 40,  default: "",      null: false
-    t.integer "priority",             default: 1,       null: false
-    t.string  "app",      limit: 40,  default: "Macro", null: false
-    t.string  "appdata",  limit: 256, default: "",      null: false
-  end
-
-  add_index "extensions", ["id"], name: "extensions_id_key", unique: true, using: :btree
 
   create_table "functions", force: true do |t|
     t.text     "title"
@@ -100,10 +53,17 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.string   "firstname"
     t.string   "patronymic"
     t.integer  "sip_user_id"
+    t.integer  "subdivision_id"
+    t.integer  "function_id"
     t.integer  "city_id"
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "people_subdivisions", id: false, force: true do |t|
+    t.integer "person_id"
+    t.integer "subdivision_id"
   end
 
   create_table "positions", force: true do |t|
@@ -168,7 +128,6 @@ ActiveRecord::Schema.define(version: 20131118115412) do
   end
 
   add_index "sip_users", ["name", "host"], name: "sip_users_idx", using: :btree
-  add_index "sip_users", ["name"], name: "uniq_name", unique: true, using: :btree
 
   create_table "subdivisions", force: true do |t|
     t.text     "title"
@@ -177,25 +136,5 @@ ActiveRecord::Schema.define(version: 20131118115412) do
   end
 
   add_index "subdivisions", ["title"], name: "index_subdivisions_on_title", using: :btree
-
-  create_table "units", force: true do |t|
-    t.text "surname",    null: false
-    t.text "firstname",  null: false
-    t.text "patronymic", null: false
-  end
-
-  add_index "units", ["surname", "firstname", "patronymic"], name: "uniq_fio", unique: true, using: :btree
-
-  create_table "voicemail_users", id: false, force: true do |t|
-    t.integer  "uniqueid",                             null: false
-    t.integer  "customer_id",            default: 0,   null: false
-    t.string   "context",     limit: 11, default: "",  null: false
-    t.integer  "mailbox",                default: 0,   null: false
-    t.string   "password",    limit: 5,  default: "0", null: false
-    t.string   "fullname",    limit: 30, default: "",  null: false
-    t.string   "email",       limit: 30, default: "",  null: false
-    t.string   "pager",       limit: 30, default: "",  null: false
-    t.datetime "stamp"
-  end
 
 end

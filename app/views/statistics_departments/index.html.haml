@@ -1,32 +1,56 @@
 .page-header
   %h1= "Статистика отделов"
-
+= render 'time'
 
 
 %table.table
   %thead
     %tr
-      %th Дата начала
-      %th Длитиельность
-      %th От кого
-      %th Кому
+      %th= sortable("calldate", "Дата начала")
+      %th= sortable("surname", "Пользователь")
+      %th= sortable("clid", "id клиента")
+      %th= sortable("src", "От кого")
+      %th= sortable("dst", "Кому")
+      %th= sortable("billsec", "Длительность")
+      %th= sortable("disposition", "Статус")
+      %th= sortable("dcontext", "Контекст")
 
   %tbody
-    - @subdivisions.each do |subdivision|
+    - @cdrs.each do |cdr|
       %tr
-        %td{colspan: 4}=subdivision.title
-      -subdivision.calls.all.each do |c|
+        %td= l cdr.calldate, format: :long
+        %td= "#{cdr.surname} #{cdr.firstname[0]}. #{cdr.patronymic[0]}."
+        %td= cdr.clid
+        %td= cdr.src
+        %td= cdr.dst
+        %td= cdr.billsec
+        %td= cdr.disposition
+        %td= cdr.dcontext
 
-        %tr
-          %td= l c.calldate, format: :long
-          %td= c.billsec
-          %td= c.src
-          %td= c.dst
+    /- @subdivisions.each do |subdivision|
+    /  -s=subdivision.calls(@cdr).all
+    /  %tr
+    /    %td{colspan: 4}=subdivision.title
+    /    %td{colspan: 3}= "Сумма: #{s.inject(0){|sum,c| sum+c.billsec.to_i}}"
 
+
+    /  -s.each do |c|
+
+    /    %tr
+    /      %td= l c.calldate, format: :long
+    /      %td= c.clid
+    /      %td= c.src
+    /      %td= c.dst
+    /      %td= c.billsec
+    /      %td= c.disposition
+    /      %td= c.dcontext
+
+    /%tr
+    /  %td= s.sum("billsec")
 
 
     /
     /  %tr
-    /    %td{colspan: 4}=subdivision.title
+    /    %td{colspan: 6}=subdivision.title
     /  %tr
     /    %td= statistics_select(subdivision)

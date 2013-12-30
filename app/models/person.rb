@@ -12,7 +12,11 @@ class Person < ActiveRecord::Base
   validates_associated :positions
 
 
-  def calls    
-    Cdr.where(src: "495#{city.number}")
+  def calls(cdr)
+    numbers = []
+    numbers << city.try(:number)
+    numbers << "495#{numbers[0]}"
+    numbers << sip_user.try(:name)
+    cdr.where("src in (?) or dst in (?)",numbers.map{|x| "#{x}"},numbers.map{|x| "#{x}"}).order(:calldate)
   end
 end

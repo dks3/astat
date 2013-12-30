@@ -14,6 +14,8 @@
       .navbar-inner
         .container
           =link_to "Список клиентов",subdivisions_path, class: 'navbar-brand'
+          =link_to "Статистика отделов",statistics_departments_path, class: 'navbar-brand'
+          /=link_to "Статистика пользователей",statistics_people_path, class: 'navbar-brand'
     .container
       =notice_messages
       =yield

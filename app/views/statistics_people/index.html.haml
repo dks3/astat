@@ -1,0 +1,38 @@
+.page-header
+  %h1= "Статистика пользователей"
+
+= render 'time'
+
+
+%table.table
+  %thead
+    %tr
+      %th Дата начала
+      %th id клиента
+      %th От кого
+      %th Кому
+      %th Длительность
+      %th Статус
+      %th Контекст
+
+  %tbody
+    - @people.each do |person|
+      -p=person.calls(@cdr).all
+      %tr
+        %td{colspan: 4}
+          =person.surname
+          =person.firstname
+          =person.patronymic unless person.patronymic.blank?
+        %td{colspan: 3}= "Сумма: #{p.inject(0){|sum,c| sum+c.billsec.to_i}}"
+
+
+      -p.each do |c|
+
+        %tr
+          %td= l c.calldate, format: :long
+          %td= c.clid
+          %td= c.src
+          %td= c.dst
+          %td= c.billsec
+          %td= c.dcontext
+

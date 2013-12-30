@@ -1,0 +1,7 @@
+= form_tag("/statistics_departments", method: "get") do
+  .field
+    = label_tag(:date1, "Период: ")
+    = select_date(@time1, prefix: 'date1', date_separator: '/')
+    &mdash;
+    = select_date(@time2, prefix: 'date2', date_separator: '/')
+    = submit_tag("Найти")

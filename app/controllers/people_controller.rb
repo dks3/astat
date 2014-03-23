@@ -4,13 +4,42 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @person = Person.includes(:sip_user, :city).find(params[:id])
+
+    @cdr = Cdr.all
+
+    @time1 = Time.now-1.months
+    @time2 = Time.now
+
+    if (params[:date1] && params[:date2])
+      @time1 = Time.new(params[:date1][:year], params[:date1][:month], params[:date1][:day], 0, 0, 0, "+00:00")
+      @time2 = Time.new(params[:date2][:year], params[:date2][:month], params[:date2][:day],23,59,59, "+00:00")
+    end
+
+    if (params[:time1] && params[:time2])
+      @time1 = Time.new(params[:time1][0,4], params[:time1][5,2], params[:time1][8,2], 0, 0, 0, "+00:00")
+      @time2 = Time.new(params[:time2][0,4], params[:time2][5,2], params[:time2][8,2],23,59,59, "+00:00")
+    end
+
+    @sort_p = :calldate
+    @sort_p = params[:sort] if (params[:sort])
+    @direction = :asc
+    @direction = params[:direction] if (params[:direction])
+
+    @cdr = @cdr.where(calldate: @time1..@time2)
+    @cdr = @cdr.order("#{params[:sort]} #{params[:direction]}") if params[:sort]
+    @cdr
   end
 
   def new
     @person = Person.new
     @person.build_city
     @person.build_sip_user
-    @person.positions << Position.new
+    @position = Position.new
+    if (params[:subdivision_id])
+      @position.subdivision_id= params[:subdivision_id]
+    end
+    @person.positions << @position
   end
 
   def create

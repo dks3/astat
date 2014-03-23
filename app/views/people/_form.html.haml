@@ -1,11 +1,5 @@
 = form_for @person do |f|
   =error_messages_for(@person)
-  /- if @person.errors.any?
-  /  #error_explanation
-  /    %h2= "#{pluralize(@person.errors.count, "error")} prohibited this sip_user from being saved:"
-  /    %ul
-  /      - @person.errors.full_messages.each do |msg|
-  /        %li= msg
   .actions
     = f.submit 'Сохранить пользователя', class: 'btn btn-primary'
   .field

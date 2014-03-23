@@ -1,0 +1,23 @@
+= form_for @tariff do |f|
+  =error_messages_for(@tariff)
+ 
+  
+  .row
+    .col-xs-6.col-md-3
+      .field
+        = f.label :Зона
+        = f.text_field :title
+      .field
+        = f.label :Цена
+        = f.text_field :price
+    .col-xs-6.col-md-9
+      .field
+        = f.fields_for :codes do |code|
+          =render "code_fields", :f => code
+        .btn=link_to_add_fields "Добавить должность", f, :codes
+        
+  %p
+  .row
+    .col-xs-12.col-md-6
+      .actions
+        = f.submit 'Сохранить', class: 'btn btn-xs btn-primary'

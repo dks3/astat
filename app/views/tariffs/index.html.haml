@@ -1,0 +1,27 @@
+%h1 Тарифы
+
+%table
+  %tr
+    %th Зона
+    %th Цена
+    %th
+    %th
+    %th
+
+  - @tariffs.each do |tariff|
+    %tr
+      %td= tariff.title
+      %td= tariff.price
+      %td
+        - tariff.codes.each do |code|
+          = "#{code.country_code}(#{code.city_code}) "
+      %td
+        = link_to edit_tariff_path(tariff), class: 'btn btn-xs btn-primary' do
+          %span.glyphicon.glyphicon-edit
+      %td
+        = link_to tariff, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-xs btn-danger' do
+          %span.glyphicon.glyphicon-trash
+
+%br
+
+= link_to 'Новая запись', new_tariff_path

@@ -1,0 +1,21 @@
+%h1 Listing codes
+
+%table
+  %tr
+    %th City code
+    %th Country code
+    %th
+    %th
+    %th
+
+  - @codes.each do |code|
+    %tr
+      %td= code.city_code
+      %td= code.country_code
+      %td= link_to 'Show', code
+      %td= link_to 'Edit', edit_code_path(code)
+      %td= link_to 'Destroy', code, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Code', new_code_path

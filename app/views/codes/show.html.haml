@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b City code:
+  = @code.city_code
+%p
+  %b Country code:
+  = @code.country_code
+
+= link_to 'Edit', edit_code_path(@code)
+\|
+= link_to 'Back', codes_path

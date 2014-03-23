@@ -1,0 +1,7 @@
+%p
+  %b Название отдела:
+  = @subdivision.title
+
+= link_to 'Редактировать', edit_subdivision_path(@subdivision)
+\|
+= link_to 'Назад', subdivisions_path

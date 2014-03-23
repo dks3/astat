@@ -25,7 +25,7 @@ module ApplicationHelper
 
   def sortable(column, title = nil)
     title = title
-    direction = column == @sort_p && @direction == "asc" ? "desc" : "asc"
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction, :time1 => @time1, :time2 => @time2}
   end
 

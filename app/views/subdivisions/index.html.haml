@@ -1,38 +1,12 @@
 .page-header
   %h1= t('titles.index_subdivision')
 
+= link_to 'Новый отдел', new_subdivision_path
+%p
 
-=link_to "Добавить Sip пользователя", new_person_path , class: 'btn btn-primary btn-sm'
-%table.table.table-default.table-sortable{data:{url: sort_positions_path}}
-  %thead
-    %tr
-      %th
-      %th Должность
-      %th Фамилия
-      %th Имя
-      %th Отчество
-      %th Гор. тел.
-      %th Номер ip-тел.
-      %th
-      %th
-  %tbody
-    - @subdivisions.each do |subdivision|
-      %tr.handle.subdivision{data: {id: subdivision.id}}
-        %td{colspan: 9}=subdivision.title
-      - subdivision.ordered_positions.each do |position|
-        %tr.handle{data: {id: position.id}}
-          %td
-            %span.glyphicon.glyphicon-resize-vertical
-          %td
-            = position.function.title
-          %td= position.person.surname
-          %td= position.person.firstname
-          %td= position.person.patronymic unless position.person.patronymic.blank?
-          %td= position.person.city.number unless position.person.city.blank?
-          %td= position.person.sip_user.name unless position.person.sip_user.blank?
-          %td
-            = link_to edit_person_path(position.person), class: 'btn btn-primary' do
-              %span.glyphicon.glyphicon-edit
-          %td
-            = link_to position, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: 'btn btn-danger' do
-              %span.glyphicon.glyphicon-trash
+%ul.list-unstyled
+  - @subdivisions.where(subdivision_id: nil).each do |subdivision|
+    =render'subdivision', :subdivision => subdivision
+%br
+
+= link_to 'Новый отдел', new_subdivision_path

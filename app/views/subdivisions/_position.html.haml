@@ -1,0 +1,7 @@
+%li.handle{data: {id: position.id}}
+  = position.function.title + '. ' + position.person.surname + ' ' + position.person.firstname + ' ' + position.person.patronymic + ' гор.: ' + position.person.city.number + ' внут.: ' + position.person.sip_user.name
+  .pull-right
+    = link_to edit_person_path(position.person), class: 'btn btn-xs btn-primary' do
+      %span.glyphicon.glyphicon-edit
+    = link_to @person, :method => :delete, :data => { :confirm => 'Удалить пользователя и все его записи?' }, class: 'btn btn-xs btn-danger' do
+      %span.glyphicon.glyphicon-trash

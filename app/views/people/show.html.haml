@@ -1,3 +1,35 @@
 .page-header
-  %h1 People#show
-%p Find me in app/views/people/show.html.haml
+  %h1= "Статистика пользователя"
+-p=@person.calls(@cdr).all
+%h3
+  =@person.surname
+  =@person.firstname
+  =@person.patronymic unless @person.patronymic.blank?
+= render 'time'
+
+
+%table.table
+  %thead
+    %tr
+      %th= sortable("calldate", "Дата начала")
+      %th= sortable("clid", "id клиента")
+      %th= sortable("src", "От кого")
+      %th= sortable("dst", "Кому")
+      %th= sortable("billsec", "Длительность")
+      %th= sortable("disposition", "Статус")
+      %th= sortable("dcontext", "Контекст")
+
+  %tbody
+    -p.each do |c|
+
+      %tr
+        %td= l c.calldate, format: :long
+        %td= c.clid
+        %td= c.src
+        %td= c.dst
+        %td= c.billsec
+        %td= c.disposition
+        %td= c.dcontext
+
+= "Сумма: #{p.inject(0){|sum,c| sum+c.billsec.to_i}}"
+

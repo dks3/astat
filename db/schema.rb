@@ -11,59 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118115412) do
+ActiveRecord::Schema.define(version: 20140316233938) do
 
-  create_table "cdr", primary_key: "cdr_pkey", force: true do |t|
-    t.datetime "calldate",                           null: false
-    t.text     "clid",                  default: "", null: false
-    t.text     "src",                   default: "", null: false
-    t.text     "dst",                   default: "", null: false
-    t.text     "dcontext",              default: "", null: false
-    t.text     "channel",               default: "", null: false
-    t.text     "dstchannel",            default: "", null: false
-    t.text     "lastapp",               default: "", null: false
-    t.text     "lastdata",              default: "", null: false
-    t.integer  "duration",    limit: 8, default: 0,  null: false
-    t.integer  "billsec",     limit: 8, default: 0,  null: false
-    t.text     "disposition",           default: "", null: false
-    t.integer  "amaflags",    limit: 8, default: 0,  null: false
-    t.text     "accountcode",           default: "", null: false
-    t.text     "uniqueid",              default: "", null: false
-    t.text     "userfield",             default: "", null: false
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "cities", force: true do |t|
-    t.string   "number"
-    t.integer  "channels"
+    t.string   "number",                           null: false
+    t.integer  "channels",   limit: 2, default: 1, null: false
     t.text     "file"
     t.boolean  "autoanswer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "codes", force: true do |t|
+    t.integer  "tariff_id"
+    t.integer  "city_code"
+    t.integer  "country_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "functions", force: true do |t|
-    t.text     "title"
+    t.text     "title",      null: false
     t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "people", force: true do |t|
-    t.string   "surname"
-    t.string   "firstname"
+    t.string   "surname",                        null: false
+    t.string   "firstname",                      null: false
     t.string   "patronymic"
     t.integer  "sip_user_id"
     t.integer  "subdivision_id"
     t.integer  "function_id"
     t.integer  "city_id"
-    t.boolean  "status"
+    t.boolean  "status",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "people_subdivisions", id: false, force: true do |t|
-    t.integer "person_id"
-    t.integer "subdivision_id"
   end
 
   create_table "positions", force: true do |t|
@@ -116,7 +103,7 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.string  "username",       limit: 80,                          null: false
     t.string  "lasms",          limit: 20,  default: ""
     t.text    "podrazdelenie"
-    t.string  "rus_name",       limit: nil
+    t.string  "rus_name"
     t.text    "zvanie"
     t.boolean "allow_city_in",              default: false,         null: false
     t.boolean "allow_city_out",             default: false,         null: false
@@ -127,14 +114,18 @@ ActiveRecord::Schema.define(version: 20131118115412) do
     t.boolean "vip",                        default: false,         null: false
   end
 
-  add_index "sip_users", ["name", "host"], name: "sip_users_idx", using: :btree
-
   create_table "subdivisions", force: true do |t|
-    t.text     "title"
+    t.text     "title",          null: false
+    t.integer  "subdivision_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "subdivisions", ["title"], name: "index_subdivisions_on_title", using: :btree
+  create_table "tariffs", force: true do |t|
+    t.string   "title"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

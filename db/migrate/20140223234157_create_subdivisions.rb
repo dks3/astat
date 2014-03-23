@@ -1,10 +1,10 @@
 class CreateSubdivisions < ActiveRecord::Migration
   def change
     create_table :subdivisions do |t|
-      t.text :title
+      t.text     :title,                    null: false
+      t.integer  :subdivision_id
 
       t.timestamps
     end
-    add_index :subdivisions, :title
   end
 end

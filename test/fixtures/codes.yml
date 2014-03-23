@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  city_code: 1
+  country_code: 1
+
+two:
+  city_code: 1
+  country_code: 1

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Зона:
+  = @tariff.title
+%p
+  %b Цена:
+  = @tariff.price
+
+= link_to 'Редактировать', edit_tariff_path(@tariff)
+\|
+= link_to 'Назад', tariffs_path

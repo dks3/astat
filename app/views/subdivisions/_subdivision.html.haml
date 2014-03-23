@@ -1,0 +1,22 @@
+.tree
+  - puts "+++++++++++ #{subdivision.inspect} +++++++++"
+  %li
+    .well.well-sm
+      = subdivision.title
+      //%td= link_to 'Show', subdivision
+      .pull-right
+        = link_to new_subdivision_path(subdivision_id: subdivision), class: 'btn btn-xs btn-success' do
+          %span.glyphicon.glyphicon-plus
+        = link_to new_person_path(subdivision_id: subdivision), class: 'btn btn-xs btn-success' do
+          %span.glyphicon.glyphicon-user
+        = link_to edit_subdivision_path(subdivision), class: 'btn btn-xs btn-primary' do
+          %span.glyphicon.glyphicon-edit
+        = link_to subdivision, :method => :delete, :data => { :confirm => 'Are you sure?' } , class: 'btn btn-xs btn-danger' do
+          %span.glyphicon.glyphicon-trash
+      %ol.subdivision{data: {id: subdivision.id}}
+        - subdivision.positions.each do |position|
+          %p.clear
+            =render "subdivisions/position", :position => position
+  - subdivision.subdivisions.each do |subdivision_child|
+    =render 'subdivision', :subdivision => subdivision_child
+

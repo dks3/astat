@@ -12,3 +12,11 @@
  *= require 'jquery-ui-1.10.3.custom'
  *= require_tree .
  */
+
+.tree {
+    margin-left: 30px;
+}
+
+.tree .tree .tree .tree {
+    margin-left: 0;
+}

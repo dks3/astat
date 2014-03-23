@@ -8,6 +8,7 @@
     %tr
       %th= sortable("calldate", "Дата начала")
       %th= sortable("surname", "Пользователь")
+      %th  Отделы
       %th= sortable("clid", "id клиента")
       %th= sortable("src", "От кого")
       %th= sortable("dst", "Кому")
@@ -19,7 +20,11 @@
     - @cdrs.each do |cdr|
       %tr
         %td= l cdr.calldate, format: :long
-        %td= "#{cdr.surname} #{cdr.firstname[0]}. #{cdr.patronymic[0]}."
+        %td= link_to "#{cdr.surname} #{cdr.firstname[0]}. #{cdr.patronymic[0]}.", person_path(cdr.person_id)
+        %td
+          -departments(cdr.person_id).subdivisions.each do |subdivision|
+            = link_to "#{subdivision.title}",statistics_department_path(subdivision.id)
+            %p
         %td= cdr.clid
         %td= cdr.src
         %td= cdr.dst
